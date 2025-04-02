@@ -93,10 +93,12 @@ if prompt := st.chat_input("Ask your query about human factors, safety engineeri
     with st.chat_message("assistant"):
         thinking_placeholder = st.empty()
         thinking_placeholder.markdown("I am thinking...")
-
+        answer = get_response_content(enhanced_prompt)
+        thinking_placeholder.markdown(answer)  # <- update inside the same context
+        st.session_state.messages.append({"role": "assistant", "content": answer})  # <- save to history
     # Generate actual response
     # answer = get_response_content(prompt)
-    answer = get_response_content(enhanced_prompt)
+    # answer = get_response_content(enhanced_prompt)
 
     # # Update the placeholder with the actual response
     # thinking_placeholder.markdown(answer)
